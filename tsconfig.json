@@ -6,7 +6,7 @@
     "**/.server/**/*.tsx",
     "**/.client/**/*.ts",
     "**/.client/**/*.tsx"
-  ],
+, "app/routes/contacts.$contactId_.destroy.tsxbc", "app/routes/contacts.$contactId_.edit.tsxbc", "app/routes/contacts.$contactId.tsx.md", "app/routes/contacts/$contactId_.destroy.tsx", "app/routes/contacts/$contactId_.edit.tsx", "app/routes/contacts/$contactId.tsx"  ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "types": ["@remix-run/node", "vite/client"],
