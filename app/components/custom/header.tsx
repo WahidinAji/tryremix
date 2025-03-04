@@ -10,8 +10,6 @@ const Header: React.FC<HeaderProps> = ({ navActive, isDark, toggleTheme }) => {
     return (
         <header className="flex items-center justify-around">
             <div className="flex items-center gap-4">
-                {/* <img src="/logo-light.png" alt="Remix" className="h-8 w-8" /> */}
-                {/* <span className="text-2xl font-bold">Remix</span> */}
                 <Button variant="ghost" size="icon" onClick={toggleTheme} className="relative w-10 h-10 rounded-full bg-transparent hover:bg-transparent shadow-transparent hover:shadow-transparent z-50">
                     <div className={`absolute inset-0 transform transition-all duration-700 ease-in-out flex items-center justify-center ${isDark ? 'opacity-100 rotate-0' : 'opacity-0 rotate-180'}`}>
                         <svg className="w-12 h-12 text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -28,20 +26,8 @@ const Header: React.FC<HeaderProps> = ({ navActive, isDark, toggleTheme }) => {
                 </Button>
             </div>
             <div className="flex items-center gap-4">
-                {/* <a href="#" className={`text-gray-800 dark:text-gray-100 active:shadow-xl ${isActive === NavItem.Docs ? 'text-yellow-500' : ''}`} onClick={() => handleClick(NavItem.Docs)}>
-                    Home
-                </a>
-                <a href="#" className={`text-gray-800 dark:text-gray-100 active:shadow-xl ${isActive === NavItem.Docs ? 'text-yellow-500' : ''}`} onClick={() => handleClick(NavItem.Docs)}>
-                    Blog
-                </a>
-                <a href="#" className={`text-gray-800 dark:text-gray-100 active:shadow-xl ${isActive === NavItem.Docs ? 'text-yellow-500' : ''}`} onClick={() => handleClick(NavItem.Docs)}>
-                    Pricing
-                </a> */}
                 {
                     resources.map(({ href, text }) => (
-                        // <a href={href} className={`text-gray-800 dark:text-gray-100 active:shadow-xl ${isActive === NavItem.Docs ? 'text-yellow-500' : ''}`} onClick={() => handleClick(NavItem.Docs)}>
-                        //     {text}
-                        // </a>
                         <NavLink key={text} to={href} className={`text-gray-800 dark:text-gray-100 active:shadow-xl ${navActive === href ? 'text-yellow-500' : ''}`}>
                             {text}
                         </NavLink>
