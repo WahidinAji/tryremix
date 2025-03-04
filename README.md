@@ -44,6 +44,8 @@ This template comes with [Tailwind CSS](https://tailwindcss.com/) already config
 - [x] Add Tailwind CSS
 - [x] Add Dark Mode
 
+https://github.com/user-attachments/assets/7ca18d57-32f1-41c5-a04b-9ff094da6caf
+
 - [ ] make a custom header
 - [ ] make a custom footer
 - [ ] make a home page
