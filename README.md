@@ -38,3 +38,14 @@ Make sure to deploy the output of `npm run build`
 ## Styling
 
 This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+
+
+# Progress
+- [x] Add Tailwind CSS
+- [x] Add Dark Mode
+
+- [ ] make a custom header
+- [ ] make a custom footer
+- [ ] make a home page
+- [ ] make a about page
+- [ ] make a blog page
