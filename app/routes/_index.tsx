@@ -12,7 +12,7 @@ export default function Index() {
         <h1>Home</h1>
       </div>
     </div>
-  )
+  );
 }
 
 // export default function Index() {

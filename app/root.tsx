@@ -1,15 +1,16 @@
 import {
+  isRouteErrorResponse,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
-  useLocation,
+  useRouteError,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
-import "./tailwind.css";
-import { useState, useEffect } from "react";
+import "~/tailwind.css";
 import Header from "./components/custom/header";
+import { THEME_KEY, useThemePreference } from "~/hooks/theme-preference";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -25,53 +26,21 @@ export const links: LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const [isDark, setIsDark] = useState(false);
-  // Toggle dark mode and save to localStorage
-  const toggleTheme = () => {
-    const newTheme = !isDark;
-    setIsDark(newTheme);
-    localStorage.setItem('theme-ui', newTheme ? 'dark' : 'light');
-  };
-
-  useEffect(() => {
-    const html = document.documentElement;
-    html.classList.toggle('dark', isDark);
-    document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
-  }, [isDark]);
-
-  useEffect(() => {
-   // Check localStorage first
-    const savedTheme = localStorage.getItem('theme-ui');
-    if (savedTheme) {
-      setIsDark(savedTheme === 'dark');
-    } else {
-      // Fall back to system preference if no saved theme
-      const darkModePreference = window.matchMedia('(prefers-color-scheme: dark)');
-      setIsDark(darkModePreference.matches);
-      const handleChange = (e: MediaQueryListEvent) => {
-        // Only update if no user preference is stored
-        if (!localStorage.getItem('theme-ui')) {
-          setIsDark(e.matches);
-        }
-      };
-      darkModePreference.addEventListener('change', handleChange);
-      return () => darkModePreference.removeEventListener('change', handleChange);
-    }
-  }, []);
-  const location = useLocation();
   return (
-    <html lang="en" className={isDark ? 'dark' : ''}>
+    <html lang="en" suppressHydrationWarning={true}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        <ThemePreventFlashScript />
+        <link rel="shortcut icon" href="../public/siesta.jpeg" type="image/x-icon" />
       </head>
-      <body data-theme={isDark ? 'dark' : 'light'} className="transition-colors duration-300 bg-gray-100 dark:bg-gray-900">
-        <Header navActive={location.pathname} isDark={isDark} toggleTheme={toggleTheme}  />
-        <div className="transition-colors duration-300">
-          {children}
-        </div>
+      <body suppressHydrationWarning={true}
+        className="transition-colors duration-300 bg-gray-100 dark:bg-gray-900"
+      >
+        <Header />
+        <div className="transition-colors duration-300">{children}</div>
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -81,4 +50,46 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return <Outlet />;
+}
+
+
+export function ThemePreventFlashScript() {
+  return (
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `
+          (() => {
+              const theme = localStorage.getItem('${THEME_KEY}');
+              if (theme === 'dark') {
+                  document.documentElement.classList.add('dark');
+                  document.documentElement.classList.remove('light');
+              } else {
+                  document.documentElement.classList.add('light');
+                  document.documentElement.classList.remove('dark');
+              }
+          })();
+        `,
+      }}
+    />
+  );
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+  if(isRouteErrorResponse(error)) {
+    <NotFoundBoundary />
+  } else if (error instanceof Error) {
+    return <h1>{error.message}</h1>
+  }
+  return <h1>Something went wrong</h1>
+}
+
+export function NotFoundBoundary() {
+  return (
+    <div className="flex h-screen items-center justify-center">
+      <div className="flex flex-col items-center gap-16">
+        <h1>Blog</h1>
+      </div>
+    </div>
+  );
 }

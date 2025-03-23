@@ -24,7 +24,8 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./app/*"]
+      "~/*": ["./app/*"],
+      "~cv": ["./cv.json"]
     },
 
     // Vite takes care of building everything, not tsc.
