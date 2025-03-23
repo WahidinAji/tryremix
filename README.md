@@ -46,6 +46,10 @@ This template comes with [Tailwind CSS](https://tailwindcss.com/) already config
 
 https://github.com/user-attachments/assets/7ca18d57-32f1-41c5-a04b-9ff094da6caf
 
+last update of
+
+https://github.com/user-attachments/assets/a52ae5d4-45f5-431b-9f86-085550c224bf
+
 - [ ] make a custom header
 - [ ] make a custom footer
 - [ ] make a home page
